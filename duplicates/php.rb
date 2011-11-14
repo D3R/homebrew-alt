@@ -165,6 +165,16 @@ class Php < Formula
     system "make install"
 
     etc.install "./php.ini-production" => "php.ini" unless File.exists? etc+"php.ini"
+    if ARGV.include?('--with-fpm') and not File.exists? etc+"php-fpm.conf"
+      etc.install "sapi/fpm/php-fpm.conf"
+      inreplace etc+"php-fpm.conf" do |s|
+        s.sub!(/^;?error_log\s*=.+$/,"error_log = #{var}/php-fpm/php-fpm.log")
+        s.sub!(/^;?daemonize\s*=.+$/,'daemonize = no')
+        s.sub!(/^;?pm\.start_servers\s*=.+$/,'pm.start_servers = 20')
+        s.sub!(/^;?pm\.min_spare_servers\s*=.+$/,'pm.min_spare_servers = 5')
+        s.sub!(/^;?pm\.max_spare_servers\s*=.+$/,'pm.max_spare_servers = 35')
+      end
+    end
   end
 
  def caveats; <<-EOS
@@ -182,21 +192,7 @@ The php.ini file can be found in:
     chmod -R ug+w #{lib}/php
     pear config-set php_ini #{etc}/php.ini
 
-If you have installed the formula with --with-fpm:
- cp #{etc}/php-fpm.conf.default #{etc}/php-fpm.conf
-
-Edit #{etc}/php-fpm.conf and set
-  error_log = #{var}/php-fpm/php-fpm.log
-  daemonize = no
-
-Uncomment (and tweak as needed) the following lines:
-  pm.start_servers = 20
-  pm.min_spare_servers = 5
-  pm.max_spare_servers = 35
-
-For the other configuration parameters, refer to http://php-fpm.org/.
-
-To launch php-fpm on startup:
+If you have installed the formula with --with-fpm, to launch php-fpm on startup:
  * If this is your first install:
      mkdir -p ~/Library/LaunchAgents
      cp #{prefix}/org.php-fpm.plist ~/Library/LaunchAgents/
