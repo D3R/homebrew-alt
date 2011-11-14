@@ -112,6 +112,8 @@ class Php < Formula
     if ARGV.include? '--with-fpm'
       args.push "--enable-fpm"
       (var+"php-fpm").mkpath
+      (prefix+'org.php-fpm.plist').write php_fpm_startup_plist
+      (prefix+'org.php-fpm.plist').chmod 0644
     end
 
     # Build Apache module by default
@@ -163,9 +165,6 @@ class Php < Formula
     system "make install"
 
     etc.install "./php.ini-production" => "php.ini" unless File.exists? etc+"php.ini"
-
-    (prefix+'org.php-fpm.plist').write php_fpm_startup_plist
-    (prefix+'org.php-fpm.plist').chmod 0644
   end
 
  def caveats; <<-EOS
