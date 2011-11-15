@@ -111,7 +111,8 @@ class Php < Formula
     # Enable PHP FPM
     if ARGV.include? '--with-fpm'
       args.push "--enable-fpm"
-      (var+"php-fpm").mkpath
+      (prefix+'var/log').mkpath
+      touch prefix+'var/log/php-fpm.log'
       (prefix+'org.php-fpm.plist').write php_fpm_startup_plist
       (prefix+'org.php-fpm.plist').chmod 0644
     end
@@ -168,7 +169,6 @@ class Php < Formula
     if ARGV.include?('--with-fpm') and not File.exists? etc+"php-fpm.conf"
       etc.install "sapi/fpm/php-fpm.conf"
       inreplace etc+"php-fpm.conf" do |s|
-        s.sub!(/^;?error_log\s*=.+$/,"error_log = #{var}/php-fpm/php-fpm.log")
         s.sub!(/^;?daemonize\s*=.+$/,'daemonize = no')
         s.sub!(/^;?pm\.start_servers\s*=.+$/,'pm.start_servers = 20')
         s.sub!(/^;?pm\.min_spare_servers\s*=.+$/,'pm.min_spare_servers = 5')
@@ -233,9 +233,9 @@ You may also need to edit the plist to use the correct "UserName".
       <key>UserName</key>
       <string>#{`whoami`.chomp}</string>
       <key>WorkingDirectory</key>
-      <string>#{var}/php-fpm</string>
+      <string>#{var}</string>
       <key>StandardErrorPath</key>
-      <string>#{var}/php-fpm/php-fpm.log</string>
+      <string>#{prefix}/var/log/php-fpm.log</string>
     </dict>
     </plist>
     EOPLIST
