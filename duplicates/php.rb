@@ -224,9 +224,9 @@ You may also need to edit the plist to use the correct "UserName".
       <string>org.php-fpm</string>
       <key>ProgramArguments</key>
       <array>
-        <string>#{sbin}/php-fpm</string>
+        <string>/usr/local/sbin/php-fpm</string>
         <string>--fpm-config</string>
-        <string>#{etc}/php-fpm.conf</string>
+        <string>/usr/local/etc/php-fpm.conf</string>
       </array>
       <key>RunAtLoad</key>
       <true/>
