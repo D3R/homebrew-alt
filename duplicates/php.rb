@@ -54,8 +54,6 @@ class Php < Formula
    ]
   end
 
-  def patches; DATA; end
-
   def install
     args = [
       "--prefix=#{prefix}",
