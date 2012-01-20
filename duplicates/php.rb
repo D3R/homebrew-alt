@@ -9,10 +9,10 @@ def postgres_installed?
 end
 
 class Php < Formula
-  url 'http://www.php.net/get/php-5.3.9.tar.bz2/from/this/mirror'
+  url 'http://www.php.net/get/php-5.3.8.tar.bz2/from/this/mirror'
   homepage 'http://php.net/'
-  md5 'dd3288ed5c08cd61ac5bf619cb357521'
-  version '5.3.9'
+  md5 '704cd414a0565d905e1074ffdc1fadfb'
+  version '5.3.8'
 
   # So PHP extensions don't report missing symbols
   skip_clean ['bin', 'sbin']
@@ -244,8 +244,8 @@ end
 
 __END__
 diff -Naur php-5.3.2/ext/tidy/tidy.c php/ext/tidy/tidy.c 
---- php-5.3.2/ext/tidy/tidy.c	2010-02-12 04:36:40.000000000 +1100
-+++ php/ext/tidy/tidy.c	2010-05-23 19:49:47.000000000 +1000
+--- php-5.3.2/ext/tidy/tidy.c 2010-02-12 04:36:40.000000000 +1100
++++ php/ext/tidy/tidy.c 2010-05-23 19:49:47.000000000 +1000
 @@ -22,6 +22,8 @@
  #include "config.h"
  #endif
@@ -264,13 +264,13 @@ diff -Naur php-5.3.2/ext/tidy/tidy.c php/ext/tidy/tidy.c
  
  /* compatibility with older versions of libtidy */
 
---- a/ext/mssql/php_mssql.h	2010-12-31 21:19:59.000000000 -0500
-+++ b/ext/mssql/php_mssql.h	2011-10-12 10:06:52.000000000 -0400
+--- a/ext/mssql/php_mssql.h 2010-12-31 21:19:59.000000000 -0500
++++ b/ext/mssql/php_mssql.h 2011-10-12 10:06:52.000000000 -0400
 @@ -65,7 +65,6 @@
  #define dbfreelogin dbloginfree
  #endif
  #define dbrpcexec dbrpcsend
--typedef unsigned char	*LPBYTE;
+-typedef unsigned char  *LPBYTE;
  typedef float           DBFLT4;
  #else
  #define MSSQL_VERSION "7.0"
