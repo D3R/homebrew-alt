@@ -1,0 +1,14 @@
+name: homebrew-alt
+id: ari:cloud:compass:99f81cd3-6055-4ddd-97a3-655f84dd430a:component/a6a6633a-8303-46fd-94f0-c5635a90b6ba/f7c66024-8572-4962-9e44-43f2cb3a89b9
+description: Alternate formulae repos for Homebrew
+configVersion: 1
+typeId: SERVICE
+fields:
+  tier: 4
+links: []
+relationships:
+  DEPENDS_ON: []
+labels:
+  - language:ruby
+  - source:github
+customFields: null
